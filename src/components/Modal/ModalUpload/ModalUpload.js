@@ -5,8 +5,11 @@ import { useDropzone } from "react-dropzone";
 import { useMutation } from "@apollo/client";
 import { PUBLISH } from "../../../gql/post";
 import { toast } from "react-toastify";
+import { useMediaQuery } from "react-responsive";
 
 export default function ModalUpload({ show, setShow }) {
+  const isMovil = useMediaQuery({ query: "(max-width: 600px)" });
+
   const [fileUpload, setFileUpload] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -63,7 +66,8 @@ export default function ModalUpload({ show, setShow }) {
         {!fileUpload && (
           <>
             <Icon name="cloud upload" />
-            <p>Arrasta tu foto aquí</p>
+
+            {isMovil ? <p>Agregar foto</p> : <p>Arrasta tu foto aquí</p>}
             <input {...getInputProps()} />
           </>
         )}

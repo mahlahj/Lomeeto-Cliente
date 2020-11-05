@@ -1,0 +1,65 @@
+@import "../../../scss/index.scss";
+
+.modal-post-movil {
+  height: 500px !important;
+
+  .ui.grid {
+    margin: 0;
+    height: 100%;
+  }
+
+  &__top {
+    background-position: center;
+    background-size: contain;
+    background-color: black;
+    background-repeat: no-repeat;
+    height: 300px;
+  }
+
+  &__bottom {
+    padding: 0 !important;
+    display: block;
+    height: 190px;
+
+    .comments {
+      display: block !important;
+      width: 100%;
+      height: calc(100%-60px) !important;
+      overflow-y: scroll !important;
+      padding: 0;
+      margin-top: 0;
+
+      .comment {
+        display: flex;
+        background-color: white;
+        padding: 5px;
+      }
+    }
+
+    .actions {
+      display: inline-block !important;
+      height: 20px;
+    }
+
+    .comment-form {
+      position: sticky !important;
+      bottom: 0;
+
+      display: flex;
+      .field {
+        margin: 0 !important;
+        width: 100%;
+
+        .ui.input {
+          height: 50px;
+          input {
+            border: 0;
+            border-top: 1px solid $border-grey;
+            border-radius: 0;
+            padding-right: 80px;
+          }
+        }
+      }
+    }
+  }
+}

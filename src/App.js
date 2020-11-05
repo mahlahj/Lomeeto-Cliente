@@ -15,7 +15,15 @@ export default function App() {
     if (!token) {
       setAuth(null);
     } else {
-      setAuth(decodeToken(token));
+      const user = decodeToken(token);
+
+      if (user.exp * 1000 < Date.now()) {
+        //comprobar si ya se cumplio el dia
+        setAuth(null);
+        removeToken();
+      } else {
+        setAuth(decodeToken(token));
+      }
     }
   }, []);
 

@@ -68,3 +68,9 @@ export const SEARCH = gql`
     }
   }
 `;
+
+export const DELETE_USER = gql`
+  mutation deleteUser {
+    deleteUser
+  }
+`;

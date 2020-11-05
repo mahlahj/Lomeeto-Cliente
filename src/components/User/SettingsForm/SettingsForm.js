@@ -9,6 +9,7 @@ import DescriptionForm from "../DescriptionForm";
 import BreedForm from "../BreedForm";
 import OwnerForm from "../OwnerForm";
 import AgeForm from "../AgeForm";
+import DeleteForm from "../DeleteForm";
 
 import "./SettingsForm.scss";
 
@@ -80,6 +81,18 @@ export default function SettingsForm({
     setChildrenModal(<PasswordForm logout={onLogout} />);
   };
 
+  const onDeleteUser = () => {
+    setTitleModal("¿Eliminar permanentemente tus datos?");
+
+    setChildrenModal(
+      <DeleteForm
+        setShowModal={setShowModal}
+        currentUser={userInfo.username}
+        logout={onLogout}
+      />
+    );
+  };
+
   const { logout } = useAuth();
   const history = useHistory();
   const client = useApolloClient();
@@ -98,6 +111,9 @@ export default function SettingsForm({
       <Button onClick={onChangeOwner}>Cambiar humano</Button>
       <Button onClick={onChangeDescription}>Cambiar descripción</Button>
       <Button onClick={onLogout}>Cerrar sesión</Button>
+      <Button onClick={onDeleteUser} className="delete">
+        Borrar usuario
+      </Button>
       <Button onClick={() => setShowModal(false)}>Cancelar</Button>
     </div>
   );

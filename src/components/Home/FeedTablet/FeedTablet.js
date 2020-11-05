@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Feed.scss";
+import "./FeedTablet.scss";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
@@ -10,7 +10,7 @@ import Actions from "../../Modal/ModalPost/Actions";
 import CommentForm from "../../Modal/ModalPost/CommentForm";
 import ModalPost from "../../Modal/ModalPost";
 
-export default function Feed() {
+export default function FeedTablet() {
   const [showModal, setShowModal] = useState(false);
   const [postSelected, setPostSelected] = useState(null);
 
@@ -36,7 +36,7 @@ export default function Feed() {
 
   return (
     <>
-      <div className="feed">
+      <div className="feedTablet">
         {map(getPostFolloweds, (post, index) => (
           <div key={index} className="feed__box">
             <Link to={`/${post.idUser.username}`}>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Feed.scss";
+import "./FeedMovil.scss";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
@@ -8,9 +8,9 @@ import { GET_POSTS_FOLLOWEDS } from "../../../gql/post";
 import ImageNotFound from "../../../assets/png/avatar.png";
 import Actions from "../../Modal/ModalPost/Actions";
 import CommentForm from "../../Modal/ModalPost/CommentForm";
-import ModalPost from "../../Modal/ModalPost";
+import ModalPostMovil from "../../Modal/ModalPostMovil/";
 
-export default function Feed() {
+export default function Feed_Movil() {
   const [showModal, setShowModal] = useState(false);
   const [postSelected, setPostSelected] = useState(null);
 
@@ -36,31 +36,31 @@ export default function Feed() {
 
   return (
     <>
-      <div className="feed">
+      <div className="feed-movil">
         {map(getPostFolloweds, (post, index) => (
-          <div key={index} className="feed__box">
+          <div key={index} className="feed-movil__box">
             <Link to={`/${post.idUser.username}`}>
-              <div className="feed__box-user">
+              <div className="feed-movil__box-user">
                 <Image src={post.idUser.avatar || ImageNotFound} avatar />
                 <span>{post.idUser.name}</span>
               </div>
             </Link>
             <div
-              className="feed__box-photo"
+              className="feed-movil__box-photo"
               style={{ backgroundImage: `url("${post.file}")` }}
               onClick={() => openPost(post)}
             />
-            <div className="feed__box-actions">
+            <div className="feed-movil__box-actions">
               <Actions post={post} />
             </div>
-            <div className="feed__box-form">
+            <div className="feed-movil__box-form">
               <CommentForm post={post} />
             </div>
           </div>
         ))}
       </div>
       {showModal && (
-        <ModalPost
+        <ModalPostMovil
           show={showModal}
           setShow={setShowModal}
           post={postSelected}

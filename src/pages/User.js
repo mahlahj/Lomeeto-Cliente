@@ -24,6 +24,7 @@ export default function User() {
   }, [startPolling, stopPolling]);
 
   if (loading) return null;
+  if (data === undefined) return null;
   const { getPosts } = data;
 
   return (

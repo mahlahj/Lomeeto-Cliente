@@ -1,5 +1,18 @@
 @import "../../scss/index.scss";
 
 .posts {
-  margin-top: 50px;
+  margin-top: 30px;
+  margin-left: 10px;
+
+  .post-movil {
+    margin-top: 10px;
+    margin-left: 5px;
+    padding: 0 !important;
+  }
+
+  .post-margin {
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 0 !important;
+  }
 }

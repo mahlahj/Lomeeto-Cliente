@@ -11,8 +11,8 @@ export default function UsersNotFolloweds() {
   const { data, loading } = useQuery(GET_NOT_FOLLOWEDS);
 
   if (loading) return null;
+  if (data === undefined) return null;
   const { getNotFolloweds } = data;
-  console.log(getNotFolloweds);
 
   return (
     <div className="users-not-followeds">

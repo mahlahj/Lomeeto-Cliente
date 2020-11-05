@@ -11,8 +11,11 @@ import AvatarForm from "../AvatarForm";
 import HeaderProfile from "./HeaderProfile";
 import SettingsForm from "../SettingsForm";
 import Followers from "./Followers";
+import { useMediaQuery } from "react-responsive";
 
 export default function Profile({ username, totalPosts }) {
+  const isMovil = useMediaQuery({ query: "(max-width: 600px)" });
+
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState("");
   const [childrenModal, setChildrenModal] = useState(null);
@@ -59,51 +62,104 @@ export default function Profile({ username, totalPosts }) {
 
   return (
     <>
-      <Grid className="profile">
-        <Grid.Column width={5} className="profile_left">
-          <Image
-            src={getUser.avatar ? getUser.avatar : ImageNotFound}
-            avatar
-            onClick={() => username === auth.username && handleModal("avatar")}
-          />
-        </Grid.Column>
-        <Grid.Column width={11} className="profile_right">
-          <HeaderProfile
-            username={username}
-            auth={auth}
-            handleModal={handleModal}
-          />
+      {isMovil ? (
+        <Grid className="profile-movil">
+          <Grid.Column width={3} className="profile_left__movil">
+            <Image
+              src={getUser.avatar ? getUser.avatar : ImageNotFound}
+              avatar
+              onClick={() =>
+                username === auth.username && handleModal("avatar")
+              }
+            />
+          </Grid.Column>
+          <Grid.Column width={13} className="profile_right__movil">
+            <HeaderProfile
+              username={username}
+              auth={auth}
+              handleModal={handleModal}
+            />
+
+            <div className="other">
+              <p className="name">{getUser.name}</p>
+              {getUser.breed && (
+                <p className="breed">
+                  <span>Raza:</span> {getUser.breed}
+                </p>
+              )}
+
+              {getUser.years || getUser.months ? (
+                <p className="age">
+                  <span>Edad: </span>
+
+                  {getUser.years > 0 && <>{getUser.years} años </>}
+
+                  {getUser.months > 0 && <>{getUser.months} meses</>}
+                </p>
+              ) : null}
+
+              {getUser.owner && (
+                <p className="owner">
+                  <span>Humano</span>: {getUser.owner}
+                </p>
+              )}
+
+              {getUser.description && (
+                <p className="description">{getUser.description}</p>
+              )}
+            </div>
+          </Grid.Column>
           <Followers username={username} totalPosts={totalPosts} />
-          <div className="other">
-            <p className="name">{getUser.name}</p>
-            {getUser.breed && (
-              <p className="breed">
-                <span>Raza:</span> {getUser.breed}
-              </p>
-            )}
+        </Grid>
+      ) : (
+        <Grid className="profile">
+          <Grid.Column width={5} className="profile_left">
+            <Image
+              src={getUser.avatar ? getUser.avatar : ImageNotFound}
+              avatar
+              onClick={() =>
+                username === auth.username && handleModal("avatar")
+              }
+            />
+          </Grid.Column>
+          <Grid.Column width={11} className="profile_right">
+            <HeaderProfile
+              username={username}
+              auth={auth}
+              handleModal={handleModal}
+            />
+            <Followers username={username} totalPosts={totalPosts} />
+            <div className="other">
+              <p className="name">{getUser.name}</p>
+              {getUser.breed && (
+                <p className="breed">
+                  <span>Raza:</span> {getUser.breed}
+                </p>
+              )}
 
-            {getUser.years || getUser.months ? (
-              <p className="age">
-                <span>Edad: </span>
+              {getUser.years || getUser.months ? (
+                <p className="age">
+                  <span>Edad: </span>
 
-                {getUser.years > 0 && <>{getUser.years} años </>}
+                  {getUser.years > 0 && <>{getUser.years} años </>}
 
-                {getUser.months && <>{getUser.months} meses</>}
-              </p>
-            ) : null}
+                  {getUser.months > 0 && <>{getUser.months} meses</>}
+                </p>
+              ) : null}
 
-            {getUser.owner && (
-              <p className="owner">
-                <span>Humano</span>: {getUser.owner}
-              </p>
-            )}
+              {getUser.owner && (
+                <p className="owner">
+                  <span>Humano</span>: {getUser.owner}
+                </p>
+              )}
 
-            {getUser.description && (
-              <p className="description">{getUser.description}</p>
-            )}
-          </div>
-        </Grid.Column>
-      </Grid>
+              {getUser.description && (
+                <p className="description">{getUser.description}</p>
+              )}
+            </div>
+          </Grid.Column>
+        </Grid>
+      )}
       <ModalBasic show={showModal} setShow={setShowModal} title={titleModal}>
         {childrenModal}
       </ModalBasic>
