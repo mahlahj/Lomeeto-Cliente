@@ -44,6 +44,7 @@ const RegisterForm = ({ setShowLogin }) => {
           },
         });
         toast.success("Usuario Registrado correctamente");
+        toast.info("Revisa tu correo para confirmar tu cuenta");
         setShowLogin(true);
       } catch (error) {
         toast.error(error.message);

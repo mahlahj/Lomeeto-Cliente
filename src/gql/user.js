@@ -74,3 +74,9 @@ export const DELETE_USER = gql`
     deleteUser
   }
 `;
+
+export const CONFIRM_USER = gql`
+  mutation confirmUser($token: String!) {
+    confirmUser(token: $token)
+  }
+`;
