@@ -14,7 +14,11 @@
     }
   }
 
-  .like.active {
-    color: $danger;
+  .active {
+    color: #f2711c;
+  }
+
+  .inactive {
+    color: gray;
   }
 }

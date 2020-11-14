@@ -84,12 +84,27 @@ export default function Actions({ post }) {
 
   return (
     <div className="actions">
-      <Icon
+      {/* <Icon
         className={isLike ? "like active" : "like"}
         name={isLike ? "heart" : "heart outline"}
         onClick={onAction}
-      />
-      {countLikes} {countLikes === 1 ? "Like" : "Likes"}
+      /> */}
+      {isLike ? (
+        <Icon
+          name="paw"
+          className="active"
+          // className={isLike ? "like active" : "like"}
+          onClick={onAction}
+        />
+      ) : (
+        <Icon
+          name="paw"
+          className="inactive"
+          // className={isLike ? "like active" : "like"}
+          onClick={onAction}
+        />
+      )}
+      {countLikes} {countLikes === 1 ? "Paw" : "Paws"}
     </div>
   );
 }
