@@ -14,9 +14,11 @@ export default function UsersNotFolloweds() {
   if (data === undefined) return null;
   const { getNotFolloweds } = data;
 
+  console.log(getNotFolloweds);
+
   return (
     <div className="users-not-followeds">
-      <h3>Usuarios nuevos</h3>
+      <h3>Lomeetos en tu ciudad que no sigues</h3>
 
       {map(getNotFolloweds, (user, index) => (
         <Link

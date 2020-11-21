@@ -16,7 +16,6 @@ const RegisterForm = ({ setShowLogin }) => {
     value: estado.name,
   }));
   const [register] = useMutation(REGISTER);
-  const [stateSelected, setStateSelected] = useState("");
   const [cities, setCities] = useState([]);
 
   const formik = useFormik({
@@ -39,11 +38,14 @@ const RegisterForm = ({ setShowLogin }) => {
       repeatPassword: Yup.string()
         .required("La contraseña es obligatoria")
         .oneOf([Yup.ref("password")], "Las contraseñas deben coincidir"),
+      estado: Yup.string().required("El estado es obligatorio"),
+      ciudad: Yup.string().required("El municipio es obligatorio"),
     }),
 
     onSubmit: async (formData) => {
       try {
         const newUser = formData;
+        console.log(formData);
         delete newUser.repeatPassword;
 
         await register({
@@ -61,12 +63,23 @@ const RegisterForm = ({ setShowLogin }) => {
     },
   });
 
-  const onSelectState = (e, { value }) => {
-    setStateSelected(value);
-    setCities(estados.find((state) => state.name === value).states);
+  const onSelectState = (e, value) => {
+    // setStateSelected(value);
+    if (!value) {
+      return;
+    }
+    let ciudades = estados.find((state) => state.name === value).states;
+
+    ciudades = ciudades.map((ciudad, index) => ({
+      key: index,
+      text: ciudad,
+      value: ciudad,
+    }));
+    setCities(ciudades);
   };
-  console.log(stateSelected);
-  console.log(cities);
+
+  const handleChange = (e, { name, value }) =>
+    formik.setFieldValue(name, value);
 
   return (
     <>
@@ -120,15 +133,32 @@ const RegisterForm = ({ setShowLogin }) => {
           clearable
           fluid
           search
-          onChange={onSelectState}
+          onChange={(e, { value, name }) => {
+            handleChange(e, { name, value });
+            onSelectState(e, value);
+          }}
           name="estado"
-          value={stateSelected}
+          value={formik.values.estado}
           placeholder="Estado"
           options={states}
           selection
+          error={formik.errors.estado}
         ></Form.Dropdown>
 
         {/* Aquí select de ciudades */}
+
+        <Form.Dropdown
+          clearable
+          fluid
+          search
+          onChange={handleChange}
+          name="ciudad"
+          value={formik.values.ciudad}
+          placeholder="Municipio"
+          options={cities}
+          selection
+          error={formik.errors.ciudad}
+        ></Form.Dropdown>
 
         <Button type="submit" className="btn-submit">
           Registrarse
@@ -150,6 +180,7 @@ function initialValues() {
     password: "",
     repeatPassword: "",
     estado: "",
+    ciudad: "",
   };
 }
 

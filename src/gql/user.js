@@ -8,7 +8,8 @@ export const REGISTER = gql`
       username
       email
       password
-      createAt
+      state
+      town
     }
   }
 `;
@@ -34,6 +35,8 @@ export const GET_USER = gql`
       owner
       description
       avatar
+      town
+      state
     }
   }
 `;

@@ -16,7 +16,7 @@ export default function UsersNotFollowedsMovil() {
 
   return (
     <>
-      <h3>Usuarios nuevos</h3>
+      <h3>Lomeetos en tu ciudad que no sigues</h3>
 
       <div className="users-not-followeds-movil">
         {map(getNotFolloweds, (user, index) => (
