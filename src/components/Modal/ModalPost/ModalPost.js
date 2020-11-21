@@ -4,6 +4,7 @@ import { Modal, Grid } from "semantic-ui-react";
 import CommentForm from "./CommentForm";
 import Comments from "./Comments";
 import Actions from "./Actions";
+import Text from "./Text";
 
 export default function ModalPost({ show, setShow, post }) {
   const onClose = () => {
@@ -19,6 +20,7 @@ export default function ModalPost({ show, setShow, post }) {
           style={{ backgroundImage: `url("${post.file}")` }}
         ></Grid.Column>
         <Grid.Column className="modal-post__right" width={6}>
+          <Text post={post} />
           <Comments post={post} />
           <Actions post={post} />
           <CommentForm post={post} />

@@ -11,7 +11,7 @@ const Auth = () => {
 
   return (
     <Container fluid className="auth">
-      <Image src={instaclone} />
+      <Image src={instaclone} className="logo-inicio" />
 
       <div className="container-form">
         {showLogin ? (

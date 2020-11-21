@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Modal, Icon, Button, Dimmer, Loader } from "semantic-ui-react";
+import { Modal, Icon, Button, Dimmer, Loader, Form } from "semantic-ui-react";
 import "./ModalUpload.scss";
 import { useDropzone } from "react-dropzone";
 import { useMutation } from "@apollo/client";
@@ -12,6 +12,7 @@ export default function ModalUpload({ show, setShow }) {
 
   const [fileUpload, setFileUpload] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState("");
 
   const [publish] = useMutation(PUBLISH);
 
@@ -35,6 +36,7 @@ export default function ModalUpload({ show, setShow }) {
     setIsLoading(false);
     setFileUpload(null);
     setShow(false);
+    setText("");
   };
 
   const onPublish = async () => {
@@ -42,7 +44,10 @@ export default function ModalUpload({ show, setShow }) {
       setIsLoading(true);
       const result = await publish({
         variables: {
-          file: fileUpload.file,
+          input: {
+            file: fileUpload.file,
+            text: text,
+          },
         },
       });
       const { data } = result;
@@ -56,8 +61,21 @@ export default function ModalUpload({ show, setShow }) {
       console.error(error);
     }
   };
+
   return (
     <Modal size="small" open={show} onClose={onCLose} className="modal-upload">
+      <Form className="post-form">
+        <Form.Input
+          placeholder="Escribe algo breve sobre tu foto"
+          name="post-text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          // value={formik.values.comment}
+          // onChange={formik.handleChange}
+          // error={formik.errors.comment && true}
+        />
+      </Form>
+
       <div
         {...getRootProps()}
         className="dropzone"

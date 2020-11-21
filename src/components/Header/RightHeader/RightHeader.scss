@@ -17,13 +17,14 @@
   .ui.image.avatar {
     width: 25px;
     height: 25px;
-    border: 1px solid #f2711c;
+    // border: 1px solid #f2711c;
     padding: 2px;
   }
 
   i.icon,
   .ui.image.avatar {
     margin: 0 0 0 19px;
+    color: blanchedalmond;
     &:hover {
       cursor: pointer;
     }

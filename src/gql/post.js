@@ -1,8 +1,17 @@
 import { gql } from "@apollo/client";
 
+// export const PUBLISH = gql`
+//   mutation publish($file: Upload) {
+//     publish(file: $file) {
+//       status
+//       urlFile
+//     }
+//   }
+// `;
+
 export const PUBLISH = gql`
-  mutation publish($file: Upload) {
-    publish(file: $file) {
+  mutation publish($input: PostInput) {
+    publish(input: $input) {
       status
       urlFile
     }
@@ -16,6 +25,8 @@ export const GET_POSTS = gql`
       idUser
       file
       typeFile
+      createdAt
+      text
     }
   }
 `;
@@ -31,7 +42,8 @@ export const GET_POSTS_FOLLOWEDS = gql`
       }
       file
       typeFile
-      createAt
+      createdAt
+      text
     }
   }
 `;

@@ -42,7 +42,10 @@ export default function LoginForm() {
 
   return (
     <Form className="login-form" onSubmit={formik.handleSubmit}>
-      <h2>Entra para interactuar con otros perritos</h2>
+      <h2>
+        Entra a la mejor comunidad de perritos, sube tus fotos y conoce a otros
+        "mejores amigos"
+      </h2>
       <Form.Input
         type="text"
         placeholder="Correo electrónico"

@@ -19,7 +19,7 @@ export default function Feed_Movil() {
   );
 
   useEffect(() => {
-    startPolling(2000);
+    startPolling(1000);
     return () => {
       stopPolling();
     };
@@ -50,6 +50,13 @@ export default function Feed_Movil() {
               style={{ backgroundImage: `url("${post.file}")` }}
               onClick={() => openPost(post)}
             />
+
+            {post.text ? (
+              <div className="feed__box-text">
+                <span>{post.idUser.username}: </span>
+                {post.text}
+              </div>
+            ) : null}
             <div className="feed-movil__box-actions">
               <Actions post={post} />
             </div>

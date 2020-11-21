@@ -6,10 +6,15 @@
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-  background-color: $background-grey-light;
+  // background-color: $background-grey-light;
+  background-color: #39304a;
+  // background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATElEQVQoU2O0NPD6z0AEYCRZ4Sr7G2Bzww5qMCCzYZbBTSSo8HG+EtiNIJPQAbJmRmSFMAlsTsCwGtlUZFvACpFNQrcepph4zxAbjgDL2zX/l5zmTwAAAABJRU5ErkJggg==);
+  // background-repeat: repeat;
 
   img {
     width: 250px;
+    // background-color: #39304a;
+    // box-shadow: 10px 5px 5px gray;
   }
 
   .container-form {

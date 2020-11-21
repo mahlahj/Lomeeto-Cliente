@@ -13,6 +13,7 @@
   &__box {
     margin-bottom: 50px;
     border: 1px solid $border-grey;
+    background-color: white;
 
     &-user {
       background-color: $background-light;
@@ -22,6 +23,14 @@
       img {
         margin-right: 15px !important;
       }
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    &-text {
+      padding: 5px !important;
 
       span {
         font-weight: bold;

@@ -1,9 +1,6 @@
 @import "../../../../scss/index.scss";
 
 .comments {
-  height: calc(100% - 95px);
-  overflow-y: scroll !important;
-
   .comment {
     display: flex;
     align-items: center;

@@ -19,7 +19,7 @@ export default function Feed() {
   );
 
   useEffect(() => {
-    startPolling(2000);
+    startPolling(1000);
     return () => {
       stopPolling();
     };
@@ -45,11 +45,18 @@ export default function Feed() {
                 <span>{post.idUser.name}</span>
               </div>
             </Link>
+
             <div
               className="feed__box-photo"
               style={{ backgroundImage: `url("${post.file}")` }}
               onClick={() => openPost(post)}
             />
+            {post.text ? (
+              <div className="feed__box-text">
+                <span>{post.idUser.username}: </span>
+                {post.text}
+              </div>
+            ) : null}
             <div className="feed__box-actions">
               <Actions post={post} />
             </div>

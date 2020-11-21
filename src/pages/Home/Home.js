@@ -6,6 +6,7 @@ import FeedTablet from "../../components/Home/FeedTablet";
 import FeedMovil from "../../components/Home/FeedMovil";
 
 import UsersNotFolloweds from "../../components/Home/UsersNotFolloweds";
+import UsersNotFollowedsMovil from "../../components/Home/UsersNotFollowedsMovil";
 import { useMediaQuery } from "react-responsive";
 
 export default function Home() {
@@ -46,7 +47,7 @@ export default function Home() {
       {isMovil && (
         <Grid className="home-movil">
           <Grid.Row className="home-movil_top">
-            <UsersNotFolloweds />
+            <UsersNotFollowedsMovil />
           </Grid.Row>
           <Grid.Row>
             <FeedMovil />

@@ -82,7 +82,6 @@ export default function Actions({ post }) {
   const { isLike } = data;
   const { countLikes } = dataCount;
 
-  console.log(isLike);
   return (
     <div className="actions">
       {isLike ? (

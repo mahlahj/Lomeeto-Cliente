@@ -4,6 +4,7 @@ import { Modal, Grid } from "semantic-ui-react";
 import CommentForm from "./CommentForm";
 import Comments from "./Comments";
 import Actions from "./Actions";
+import Text from "../ModalPost/Text";
 
 export default function ModalPostMovil({ show, setShow, post }) {
   const onClose = () => {
@@ -18,6 +19,7 @@ export default function ModalPostMovil({ show, setShow, post }) {
           style={{ backgroundImage: `url("${post.file}")` }}
         ></Grid.Row>
         <Grid.Row className="modal-post-movil__bottom">
+          <Text post={post} />
           <Actions post={post} />
           <Comments post={post} />
 

@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./RegisterForm.scss";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Dropdown } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/client";
 import "../../../gql/user";
 import { REGISTER } from "../../../gql/user";
 import { toast } from "react-toastify";
+import { estados } from "./estados";
 
 const RegisterForm = ({ setShowLogin }) => {
+  const states = estados.map((estado, index) => ({
+    key: index,
+    text: estado.name,
+    value: estado.name,
+  }));
   const [register] = useMutation(REGISTER);
+  const [stateSelected, setStateSelected] = useState("");
+  const [cities, setCities] = useState([]);
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -52,6 +60,13 @@ const RegisterForm = ({ setShowLogin }) => {
       }
     },
   });
+
+  const onSelectState = (e, { value }) => {
+    setStateSelected(value);
+    setCities(estados.find((state) => state.name === value).states);
+  };
+  console.log(stateSelected);
+  console.log(cities);
 
   return (
     <>
@@ -99,6 +114,22 @@ const RegisterForm = ({ setShowLogin }) => {
           value={formik.values.repeatPassword}
           error={formik.errors.repeatPassword}
         />
+        {/* Aquí select de estados */}
+
+        <Form.Dropdown
+          clearable
+          fluid
+          search
+          onChange={onSelectState}
+          name="estado"
+          value={stateSelected}
+          placeholder="Estado"
+          options={states}
+          selection
+        ></Form.Dropdown>
+
+        {/* Aquí select de ciudades */}
+
         <Button type="submit" className="btn-submit">
           Registrarse
         </Button>
@@ -118,6 +149,7 @@ function initialValues() {
     email: "",
     password: "",
     repeatPassword: "",
+    estado: "",
   };
 }
 
