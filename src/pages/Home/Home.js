@@ -9,7 +9,11 @@ import UsersNotFolloweds from "../../components/Home/UsersNotFolloweds";
 import UsersNotFollowedsMovil from "../../components/Home/UsersNotFollowedsMovil";
 import { useMediaQuery } from "react-responsive";
 
+import useAuth from "../../hooks/useAuth";
+
 export default function Home() {
+  const { auth } = useAuth();
+
   const isMovil = useMediaQuery({ query: "(max-width: 600px)" });
   const isTablet = useMediaQuery({
     query: "(min-width: 601px) and (max-width: 1099px)",
@@ -27,7 +31,7 @@ export default function Home() {
           </Grid.Column>
 
           <Grid.Column className="home__right" width={6}>
-            <UsersNotFolloweds />
+            <UsersNotFolloweds user={auth} />
           </Grid.Column>
         </Grid>
       )}
@@ -39,7 +43,7 @@ export default function Home() {
           </Grid.Column>
 
           <Grid.Column className="home__right" width={5}>
-            <UsersNotFolloweds />
+            <UsersNotFolloweds user={auth} />
           </Grid.Column>
         </Grid>
       )}
@@ -47,7 +51,7 @@ export default function Home() {
       {isMovil && (
         <Grid className="home-movil">
           <Grid.Row className="home-movil_top">
-            <UsersNotFollowedsMovil />
+            <UsersNotFollowedsMovil user={auth} />
           </Grid.Row>
           <Grid.Row>
             <FeedMovil />

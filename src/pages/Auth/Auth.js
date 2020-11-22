@@ -3,7 +3,7 @@ import { Container, Image } from "semantic-ui-react";
 import RegisterForm from "../../components/Auth/RegisterForm";
 import LoginForm from "../../components/Auth/LoginForm";
 
-import instaclone from "../../assets/png/instaclone.png";
+import logo from "../../assets/png/instaclone.png";
 import "./Auth.scss";
 
 const Auth = () => {
@@ -11,7 +11,7 @@ const Auth = () => {
 
   return (
     <Container fluid className="auth">
-      <Image src={instaclone} className="logo-inicio" />
+      <Image src={logo} className="logo-inicio" />
 
       <div className="container-form">
         {showLogin ? (
@@ -30,9 +30,9 @@ const Auth = () => {
             </>
           ) : (
             <>
-              Entra con tu cuenta
+              ¿Ya tienes una cuenta?
+              <br />
               <span onClick={() => setShowLogin(!showLogin)}>
-                {" "}
                 Iniciar Sesión
               </span>
             </>

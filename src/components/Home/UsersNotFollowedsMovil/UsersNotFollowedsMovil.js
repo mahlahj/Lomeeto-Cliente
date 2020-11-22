@@ -7,7 +7,9 @@ import { useQuery } from "@apollo/client";
 import { GET_NOT_FOLLOWEDS } from "../../../gql/follow";
 import ImageNotFound from "../../../assets/png/avatar.png";
 
-export default function UsersNotFollowedsMovil() {
+export default function UsersNotFollowedsMovil({ user }) {
+  const { state, town } = user;
+
   const { data, loading } = useQuery(GET_NOT_FOLLOWEDS);
 
   if (loading) return null;
@@ -16,7 +18,9 @@ export default function UsersNotFollowedsMovil() {
 
   return (
     <>
-      <h3>Lomeetos en tu ciudad que no sigues</h3>
+      <h4 style={{ color: "#5296a5", marginTop: 10 }}>
+        Lomeetos en {town}, {state} que no sigues
+      </h4>
 
       <div className="users-not-followeds-movil">
         {map(getNotFolloweds, (user, index) => (

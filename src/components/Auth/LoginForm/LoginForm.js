@@ -4,6 +4,8 @@ import { Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+// import logo from "../../../assets/png/instaclone.png";
+
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../../gql/user";
 import { setToken, decodeToken } from "../../../utils/token";
@@ -41,32 +43,36 @@ export default function LoginForm() {
   });
 
   return (
-    <Form className="login-form" onSubmit={formik.handleSubmit}>
-      <h2>
-        Entra a la mejor comunidad de perritos, sube tus fotos y conoce a otros
-        "mejores amigos"
-      </h2>
-      <Form.Input
-        type="text"
-        placeholder="Correo electrónico"
-        name="email"
-        value={formik.values.email}
-        onChange={formik.handleChange}
-        error={formik.errors.email && true}
-      />
-      <Form.Input
-        type="password"
-        placeholder="Contraseña"
-        name="password"
-        value={formik.values.password}
-        onChange={formik.handleChange}
-        error={formik.errors.password && true}
-      />
-      <Button type="submit" className="btn-submit">
-        Iniciar Sesión
-      </Button>
-      {error && <p className="submit-error">{error}</p>}
-    </Form>
+    <>
+      {/* <Image src={logo} className="logo-inicio" /> */}
+
+      <Form className="login-form" onSubmit={formik.handleSubmit}>
+        <h2>
+          Entra a la mejor comunidad de perritos, sube tus fotos y conoce a
+          otros "mejores amigos"
+        </h2>
+        <Form.Input
+          type="text"
+          placeholder="Correo electrónico"
+          name="email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.errors.email && true}
+        />
+        <Form.Input
+          type="password"
+          placeholder="Contraseña"
+          name="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.errors.password && true}
+        />
+        <Button type="submit" className="btn-submit">
+          Iniciar Sesión
+        </Button>
+        {error && <p className="submit-error">{error}</p>}
+      </Form>
+    </>
   );
 }
 

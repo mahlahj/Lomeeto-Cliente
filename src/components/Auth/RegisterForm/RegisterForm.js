@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./RegisterForm.scss";
-import { Form, Button, Dropdown } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/client";
@@ -8,6 +8,8 @@ import "../../../gql/user";
 import { REGISTER } from "../../../gql/user";
 import { toast } from "react-toastify";
 import { estados } from "./estados";
+
+// import logo from "../../../assets/png/instaclone.png";
 
 const RegisterForm = ({ setShowLogin }) => {
   const states = estados.map((estado, index) => ({
@@ -22,6 +24,7 @@ const RegisterForm = ({ setShowLogin }) => {
     initialValues: initialValues(),
     validationSchema: Yup.object({
       name: Yup.string().required("El nombre es obligatorio"),
+
       username: Yup.string()
         .matches(
           /^[a-zA-Z0-9-]*$/,
@@ -38,14 +41,14 @@ const RegisterForm = ({ setShowLogin }) => {
       repeatPassword: Yup.string()
         .required("La contraseña es obligatoria")
         .oneOf([Yup.ref("password")], "Las contraseñas deben coincidir"),
-      estado: Yup.string().required("El estado es obligatorio"),
-      ciudad: Yup.string().required("El municipio es obligatorio"),
+      state: Yup.string().required("El estado es obligatorio"),
+
+      town: Yup.string().required("El municipio es obligatorio"),
     }),
 
     onSubmit: async (formData) => {
       try {
         const newUser = formData;
-        console.log(formData);
         delete newUser.repeatPassword;
 
         await register({
@@ -83,9 +86,9 @@ const RegisterForm = ({ setShowLogin }) => {
 
   return (
     <>
-      <h2 className="register-form-title">
-        Regístrate para unirte a la comunidad de perritos
-      </h2>
+      {/* <Image src={logo} className="logo-inicio" /> */}
+
+      <h2 className="register-form-title">Únete a la comunidad de perritos</h2>
       <Form className="register-form" onSubmit={formik.handleSubmit}>
         <Form.Input
           type="text"
@@ -93,7 +96,7 @@ const RegisterForm = ({ setShowLogin }) => {
           name="name"
           onChange={formik.handleChange}
           value={formik.values.name}
-          error={formik.errors.name}
+          error={formik.errors.name && true}
         />
         <Form.Input
           type="text"
@@ -101,7 +104,7 @@ const RegisterForm = ({ setShowLogin }) => {
           name="username"
           onChange={formik.handleChange}
           value={formik.values.username}
-          error={formik.errors.username}
+          error={formik.errors.username && true}
         />
         <Form.Input
           type="text"
@@ -109,7 +112,7 @@ const RegisterForm = ({ setShowLogin }) => {
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
-          error={formik.errors.email}
+          error={formik.errors.email && true}
         />
         <Form.Input
           type="password"
@@ -117,7 +120,7 @@ const RegisterForm = ({ setShowLogin }) => {
           name="password"
           onChange={formik.handleChange}
           value={formik.values.password}
-          error={formik.errors.password}
+          error={formik.errors.password && true}
         />
         <Form.Input
           type="password"
@@ -125,7 +128,7 @@ const RegisterForm = ({ setShowLogin }) => {
           name="repeatPassword"
           onChange={formik.handleChange}
           value={formik.values.repeatPassword}
-          error={formik.errors.repeatPassword}
+          error={formik.errors.repeatPassword && true}
         />
         {/* Aquí select de estados */}
 
@@ -137,12 +140,12 @@ const RegisterForm = ({ setShowLogin }) => {
             handleChange(e, { name, value });
             onSelectState(e, value);
           }}
-          name="estado"
-          value={formik.values.estado}
+          name="state"
+          value={formik.values.state}
           placeholder="Estado"
           options={states}
           selection
-          error={formik.errors.estado}
+          error={formik.errors.estado && true}
         ></Form.Dropdown>
 
         {/* Aquí select de ciudades */}
@@ -152,12 +155,12 @@ const RegisterForm = ({ setShowLogin }) => {
           fluid
           search
           onChange={handleChange}
-          name="ciudad"
-          value={formik.values.ciudad}
+          name="town"
+          value={formik.values.town}
           placeholder="Municipio"
           options={cities}
           selection
-          error={formik.errors.ciudad}
+          error={formik.errors.ciudad && true}
         ></Form.Dropdown>
 
         <Button type="submit" className="btn-submit">
@@ -179,8 +182,8 @@ function initialValues() {
     email: "",
     password: "",
     repeatPassword: "",
-    estado: "",
-    ciudad: "",
+    state: "",
+    town: "",
   };
 }
 
