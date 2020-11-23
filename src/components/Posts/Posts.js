@@ -11,24 +11,30 @@ export default function Posts({ getPosts }) {
 
   return (
     <div className="posts">
-      <h1>Posts</h1>
+      {getPosts.length > 0 ? (
+        <>
+          <h1>Posts</h1>
 
-      {isMovil ? (
-        <Grid columns={3}>
-          {map(getPosts, (post, index) => (
-            <Grid.Column key={index} className="post-movil">
-              <PreviewPost post={post} />
-            </Grid.Column>
-          ))}
-        </Grid>
+          {isMovil ? (
+            <Grid columns={3}>
+              {map(getPosts, (post, index) => (
+                <Grid.Column key={index} className="post-movil">
+                  <PreviewPost post={post} />
+                </Grid.Column>
+              ))}
+            </Grid>
+          ) : (
+            <Grid columns={4}>
+              {map(getPosts, (post, index) => (
+                <Grid.Column key={index} className="post-margin">
+                  <PreviewPost post={post} />
+                </Grid.Column>
+              ))}
+            </Grid>
+          )}
+        </>
       ) : (
-        <Grid columns={4}>
-          {map(getPosts, (post, index) => (
-            <Grid.Column key={index} className="post-margin">
-              <PreviewPost post={post} />
-            </Grid.Column>
-          ))}
-        </Grid>
+        <h2>No hay publicaciones aún</h2>
       )}
     </div>
   );

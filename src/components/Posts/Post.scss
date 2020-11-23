@@ -2,17 +2,24 @@
 
 .posts {
   margin-top: 30px;
-  margin-left: 10px;
+  margin-left: 25px;
+
+  h1,
+  h2 {
+    text-align: center;
+  }
 
   .post-movil {
     margin-top: 10px;
-    margin-left: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
     padding: 0 !important;
   }
 
   .post-margin {
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
     padding: 0 !important;
   }
 }
