@@ -9,7 +9,7 @@ import {
   COUNT_LIKES,
 } from "../../../../gql/like";
 
-export default function Actions({ post }) {
+export default function Actions({ post, isTheSame, isFollow }) {
   const [loadingAction, setLoadingAction] = useState(false);
 
   const [deleteLike] = useMutation(DELETE_LIKE);
@@ -69,11 +69,13 @@ export default function Actions({ post }) {
   const onAction = () => {
     // isLike ? onDeleteLike : onAddLike
 
-    if (!loadingAction) {
-      if (isLike) {
-        onDeleteLike();
-      } else {
-        onAddLike();
+    if (isTheSame || isFollow) {
+      if (!loadingAction) {
+        if (isLike) {
+          onDeleteLike();
+        } else {
+          onAddLike();
+        }
       }
     }
   };
@@ -84,20 +86,42 @@ export default function Actions({ post }) {
 
   return (
     <div className="actions">
-      {isLike ? (
-        <Icon
-          name="paw"
-          className="active"
-          // className={isLike ? "like active" : "like"}
-          onClick={onAction}
-        />
+      {isFollow || isTheSame ? (
+        <>
+          {isLike ? (
+            <Icon
+              name="paw"
+              className="active"
+              // className={isLike ? "like active" : "like"}
+              onClick={onAction}
+            />
+          ) : (
+            <Icon
+              name="paw"
+              className="inactive"
+              // className={isLike ? "like active" : "like"}
+              onClick={onAction}
+            />
+          )}
+        </>
       ) : (
-        <Icon
-          name="paw"
-          className="inactive"
-          // className={isLike ? "like active" : "like"}
-          onClick={onAction}
-        />
+        <div className="actions-inactive">
+          {isLike ? (
+            <Icon
+              name="paw"
+              className="active"
+              // className={isLike ? "like active" : "like"}
+              onClick={onAction}
+            />
+          ) : (
+            <Icon
+              name="paw"
+              className="inactive"
+              // className={isLike ? "like active" : "like"}
+              onClick={onAction}
+            />
+          )}
+        </div>
       )}
       {countLikes} {countLikes === 1 ? "Paw" : "Paws"}
     </div>

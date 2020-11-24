@@ -9,6 +9,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   // background: $background-grey-light !important;
   background: #eaf6ff !important;
+
+  .ui.grid > * {
+    padding-left: 1rem;
+    padding-right: 0 !important;
+  }
+
+  .ui.grid {
+    margin-right: 0 !important;
+  }
 }
 
 code {

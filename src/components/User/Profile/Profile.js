@@ -64,7 +64,7 @@ export default function Profile({ username, totalPosts }) {
     <>
       {isMovil ? (
         <Grid className="profile-movil">
-          <Grid.Column width={3} className="profile_left__movil">
+          <Grid.Column width={4} className="profile_left__movil">
             <Image
               src={getUser.avatar ? getUser.avatar : ImageNotFound}
               avatar
@@ -73,7 +73,7 @@ export default function Profile({ username, totalPosts }) {
               }
             />
           </Grid.Column>
-          <Grid.Column width={13} className="profile_right__movil">
+          <Grid.Column width={12} className="profile_right__movil">
             <HeaderProfile
               username={username}
               auth={auth}

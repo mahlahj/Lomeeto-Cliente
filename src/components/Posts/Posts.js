@@ -16,7 +16,7 @@ export default function Posts({ getPosts }) {
           <h1>Posts</h1>
 
           {isMovil ? (
-            <Grid columns={3}>
+            <Grid columns={3} className="grid-posts">
               {map(getPosts, (post, index) => (
                 <Grid.Column key={index} className="post-movil">
                   <PreviewPost post={post} />

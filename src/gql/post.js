@@ -22,7 +22,10 @@ export const GET_POSTS = gql`
   query getPosts($username: String!) {
     getPosts(username: $username) {
       id
-      idUser
+      idUser {
+        name
+        username
+      }
       file
       typeFile
       createdAt
