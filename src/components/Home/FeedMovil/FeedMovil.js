@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import { Image } from "semantic-ui-react";
 import { GET_POSTS_FOLLOWEDS } from "../../../gql/post";
 import ImageNotFound from "../../../assets/png/avatar.png";
-import Actions from "../../Modal/ModalPost/Actions";
+import Actions from "../../Modal/ModalPostMovil/Actions";
 import CommentForm from "../../Modal/ModalPost/CommentForm";
 import ModalPostMovil from "../../Modal/ModalPostMovil/";
 

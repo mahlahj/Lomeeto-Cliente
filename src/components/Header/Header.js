@@ -39,12 +39,12 @@ export default function Header() {
 
           {isMovil && (
             <>
-              <Grid.Column width={1} className="header_logo">
+              <Grid.Column width={2} className="header_logo">
                 <Link to="/">
                   <Image className="imagenLogo" src={LogoIcon} alt="Logo" />
                 </Link>
               </Grid.Column>
-              <Grid.Column width={10} className="header_search">
+              <Grid.Column width={9} className="header_search">
                 <Search />
               </Grid.Column>
               <Grid.Column width={5} className="header_right">
