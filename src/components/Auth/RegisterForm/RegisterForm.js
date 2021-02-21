@@ -9,8 +9,6 @@ import { REGISTER } from "../../../gql/user";
 import { toast } from "react-toastify";
 import { estados } from "./estados";
 
-// import logo from "../../../assets/png/instaclone.png";
-
 const RegisterForm = ({ setShowLogin }) => {
   const states = estados.map((estado, index) => ({
     key: index,
@@ -86,8 +84,6 @@ const RegisterForm = ({ setShowLogin }) => {
 
   return (
     <>
-      {/* <Image src={logo} className="logo-inicio" /> */}
-
       <h2 className="register-form-title">Únete a la comunidad de perritos</h2>
       <Form className="register-form" onSubmit={formik.handleSubmit}>
         <Form.Input
