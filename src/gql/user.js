@@ -10,6 +10,8 @@ export const REGISTER = gql`
       password
       state
       town
+      business
+      type
     }
   }
 `;
@@ -37,6 +39,16 @@ export const GET_USER = gql`
       avatar
       town
       state
+      preferences
+      business
+      address
+      type
+      phone
+      contactEmail
+      schedule {
+        day
+        hour
+      }
     }
   }
 `;
@@ -81,5 +93,11 @@ export const DELETE_USER = gql`
 export const CONFIRM_USER = gql`
   mutation confirmUser($token: String!) {
     confirmUser(token: $token)
+  }
+`;
+
+export const REGISTER_FIRST_PREFERENCES = gql`
+  mutation registerFirstPreferences($input: UserUpdateInput) {
+    registerFirstPreferences(input: $input)
   }
 `;

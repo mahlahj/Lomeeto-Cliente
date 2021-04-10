@@ -59,107 +59,264 @@ export default function Profile({ username, totalPosts }) {
         break;
     }
   };
-
   return (
     <>
-      {isMovil ? (
-        <Grid className="profile-movil">
-          <Grid.Column width={4} className="profile_left__movil">
-            <Image
-              src={getUser.avatar ? getUser.avatar : ImageNotFound}
-              avatar
-              onClick={() =>
-                username === auth.username && handleModal("avatar")
-              }
-            />
-          </Grid.Column>
-          <Grid.Column width={12} className="profile_right__movil">
-            <HeaderProfile
-              username={username}
-              auth={auth}
-              handleModal={handleModal}
-            />
+      {/* //RECABAR SI ES BUSINESS Y CAMBIAR EL COMPONENTE DE PERFIL */}
 
-            <div className="other">
-              <p className="name">{getUser.name}</p>
-              {getUser.breed && (
-                <p className="breed">
-                  <span>Raza:</span> {getUser.breed}
-                </p>
-              )}
+      {getUser.business ? (
+        <>
+          {isMovil ? (
+            <Grid className="profile-movil">
+              <Grid.Column width={4} className="profile_left__movil">
+                <Image
+                  src={getUser.avatar ? getUser.avatar : ImageNotFound}
+                  avatar
+                  onClick={() =>
+                    username === auth.username && handleModal("avatar")
+                  }
+                />
+              </Grid.Column>
+              <Grid.Column width={12} className="profile_right__movil">
+                <HeaderProfile
+                  username={username}
+                  auth={auth}
+                  handleModal={handleModal}
+                />
 
-              {getUser.years || getUser.months ? (
-                <p className="age">
-                  <span>Edad: </span>
+                <div className="other">
+                  <p className="name">{getUser.name}</p>
 
-                  {getUser.years > 0 && <>{getUser.years} años </>}
+                  {getUser.description && (
+                    <p className="description">{getUser.description}</p>
+                  )}
 
-                  {getUser.months > 0 && <>{getUser.months} meses</>}
-                </p>
-              ) : null}
+                  {getUser.phone.length > 0 && (
+                    <p className="phone">
+                      <span>Teléfonos:</span>{" "}
+                      {getUser.phone.map((phone) => (
+                        <>{phone + ", "}</>
+                      ))}
+                    </p>
+                  )}
 
-              {getUser.owner && (
-                <p className="owner">
-                  <span>Humano</span>: {getUser.owner}
-                </p>
-              )}
+                  <p className="address">
+                    <span>Dirección: </span>
 
-              {getUser.description && (
-                <p className="description">{getUser.description}</p>
-              )}
-            </div>
-          </Grid.Column>
-          <Followers username={username} totalPosts={totalPosts} />
-        </Grid>
+                    {getUser.address && <>{getUser.address + ", "}</>}
+                    {getUser.town}
+                    {", " + getUser.state}
+                  </p>
+
+                  {getUser.owner && (
+                    <p className="owner">
+                      <span>Humano:</span>: {getUser.owner}
+                    </p>
+                  )}
+
+                  {getUser.contactEmail && (
+                    <p className="contactEmail">
+                      <span>Correo:</span>: {getUser.contactEmail}
+                    </p>
+                  )}
+
+                  {getUser.schedule.length > 0 && (
+                    <>
+                      <p className="schedule">
+                        <span>Horario:</span>:
+                      </p>
+
+                      {/* Map de días y horas */}
+                      {getUser.schedule.map((day) => (
+                        <>
+                          <p className="hour">
+                            <span>{day.day}:</span> {day.hour}
+                          </p>
+                        </>
+                      ))}
+                    </>
+                  )}
+                </div>
+              </Grid.Column>
+              <Followers username={username} totalPosts={totalPosts} />
+            </Grid>
+          ) : (
+            <Grid className="profile">
+              <Grid.Column width={5} className="profile_left">
+                <Image
+                  src={getUser.avatar ? getUser.avatar : ImageNotFound}
+                  avatar
+                  onClick={() =>
+                    username === auth.username && handleModal("avatar")
+                  }
+                />
+              </Grid.Column>
+              <Grid.Column width={11} className="profile_right">
+                <HeaderProfile
+                  username={username}
+                  auth={auth}
+                  handleModal={handleModal}
+                />
+                <Followers username={username} totalPosts={totalPosts} />
+                <div className="other">
+                  <p className="name">{getUser.name}</p>
+
+                  {getUser.description && (
+                    <p className="description">{getUser.description}</p>
+                  )}
+
+                  {getUser.phone.length > 0 && (
+                    <p className="phone">
+                      <span>Teléfonos:</span>{" "}
+                      {getUser.phone.map((phone) => (
+                        <>{phone + ", "}</>
+                      ))}
+                    </p>
+                  )}
+
+                  <p className="address">
+                    <span>Dirección: </span>
+
+                    {getUser.address && <>{getUser.address + ", "}</>}
+                    {getUser.town}
+                    {", " + getUser.state}
+                  </p>
+
+                  {getUser.owner && (
+                    <p className="owner">
+                      <span>Humano:</span>: {getUser.owner}
+                    </p>
+                  )}
+
+                  {getUser.contactEmail && (
+                    <p className="contactEmail">
+                      <span>Correo:</span>: {getUser.contactEmail}
+                    </p>
+                  )}
+
+                  {getUser.schedule.length > 0 && (
+                    <>
+                      <p className="schedule">
+                        <span>Horario:</span>:
+                      </p>
+
+                      {/* TODO: Checar el map de días y horas */}
+                      {getUser.schedule.map((day) => (
+                        <>
+                          <p className="hour">
+                            <span>{day.day}:</span> {day.hour}
+                          </p>
+                        </>
+                      ))}
+                    </>
+                  )}
+                </div>
+              </Grid.Column>
+            </Grid>
+          )}
+        </>
       ) : (
-        <Grid className="profile">
-          <Grid.Column width={5} className="profile_left">
-            <Image
-              src={getUser.avatar ? getUser.avatar : ImageNotFound}
-              avatar
-              onClick={() =>
-                username === auth.username && handleModal("avatar")
-              }
-            />
-          </Grid.Column>
-          <Grid.Column width={11} className="profile_right">
-            <HeaderProfile
-              username={username}
-              auth={auth}
-              handleModal={handleModal}
-            />
-            <Followers username={username} totalPosts={totalPosts} />
-            <div className="other">
-              <p className="name">{getUser.name}</p>
-              {getUser.breed && (
-                <p className="breed">
-                  <span>Raza:</span> {getUser.breed}
-                </p>
-              )}
+        <>
+          {isMovil ? (
+            <Grid className="profile-movil">
+              <Grid.Column width={4} className="profile_left__movil">
+                <Image
+                  src={getUser.avatar ? getUser.avatar : ImageNotFound}
+                  avatar
+                  onClick={() =>
+                    username === auth.username && handleModal("avatar")
+                  }
+                />
+              </Grid.Column>
+              <Grid.Column width={12} className="profile_right__movil">
+                <HeaderProfile
+                  username={username}
+                  auth={auth}
+                  handleModal={handleModal}
+                />
 
-              {getUser.years || getUser.months ? (
-                <p className="age">
-                  <span>Edad: </span>
+                <div className="other">
+                  <p className="name">{getUser.name}</p>
+                  {getUser.breed && (
+                    <p className="breed">
+                      <span>Raza:</span> {getUser.breed}
+                    </p>
+                  )}
 
-                  {getUser.years > 0 && <>{getUser.years} años </>}
+                  {getUser.years || getUser.months ? (
+                    <p className="age">
+                      <span>Edad: </span>
 
-                  {getUser.months > 0 && <>{getUser.months} meses</>}
-                </p>
-              ) : null}
+                      {getUser.years > 0 && <>{getUser.years} años </>}
 
-              {getUser.owner && (
-                <p className="owner">
-                  <span>Humano</span>: {getUser.owner}
-                </p>
-              )}
+                      {getUser.months > 0 && <>{getUser.months} meses</>}
+                    </p>
+                  ) : null}
 
-              {getUser.description && (
-                <p className="description">{getUser.description}</p>
-              )}
-            </div>
-          </Grid.Column>
-        </Grid>
+                  {getUser.owner && (
+                    <p className="owner">
+                      <span>Humano</span>: {getUser.owner}
+                    </p>
+                  )}
+
+                  {getUser.description && (
+                    <p className="description">{getUser.description}</p>
+                  )}
+                </div>
+              </Grid.Column>
+              <Followers username={username} totalPosts={totalPosts} />
+            </Grid>
+          ) : (
+            <Grid className="profile">
+              <Grid.Column width={5} className="profile_left">
+                <Image
+                  src={getUser.avatar ? getUser.avatar : ImageNotFound}
+                  avatar
+                  onClick={() =>
+                    username === auth.username && handleModal("avatar")
+                  }
+                />
+              </Grid.Column>
+              <Grid.Column width={11} className="profile_right">
+                <HeaderProfile
+                  username={username}
+                  auth={auth}
+                  handleModal={handleModal}
+                />
+                <Followers username={username} totalPosts={totalPosts} />
+                <div className="other">
+                  <p className="name">{getUser.name}</p>
+                  {getUser.breed && (
+                    <p className="breed">
+                      <span>Raza:</span> {getUser.breed}
+                    </p>
+                  )}
+
+                  {getUser.years || getUser.months ? (
+                    <p className="age">
+                      <span>Edad: </span>
+
+                      {getUser.years > 0 && <>{getUser.years} años </>}
+
+                      {getUser.months > 0 && <>{getUser.months} meses</>}
+                    </p>
+                  ) : null}
+
+                  {getUser.owner && (
+                    <p className="owner">
+                      <span>Humano</span>: {getUser.owner}
+                    </p>
+                  )}
+
+                  {getUser.description && (
+                    <p className="description">{getUser.description}</p>
+                  )}
+                </div>
+              </Grid.Column>
+            </Grid>
+          )}
+        </>
       )}
+
       <ModalBasic show={showModal} setShow={setShowModal} title={titleModal}>
         {childrenModal}
       </ModalBasic>

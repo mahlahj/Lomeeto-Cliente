@@ -39,7 +39,12 @@
 
         .owner,
         .breed,
-        .age {
+        .age,
+        .schedule,
+        .address,
+        .phone,
+        .contactEmail,
+        .hour {
           font-size: 12px;
           margin-top: 10px;
 
@@ -64,7 +69,12 @@
 
       .owner,
       .breed,
-      .age {
+      .age,
+      .schedule,
+      .address,
+      .phone,
+      .contactEmail,
+      .hour {
         font-size: 12px;
         margin-top: 10px;
 

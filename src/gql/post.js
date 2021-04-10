@@ -50,3 +50,21 @@ export const GET_POSTS_FOLLOWEDS = gql`
     }
   }
 `;
+
+export const GET_RECOMMENDED_POSTS = gql`
+  query getRecommendedPosts {
+    getRecommendedPosts {
+      id
+      idUser {
+        name
+        username
+        avatar
+        business
+      }
+      file
+      typeFile
+      createdAt
+      text
+    }
+  }
+`;

@@ -7,11 +7,14 @@ import PasswordForm from "../PasswordForm";
 import EmailForm from "../EmailForm";
 import DescriptionForm from "../DescriptionForm";
 import BreedForm from "../BreedForm";
-import OwnerForm from "../OwnerForm";
-import AgeForm from "../AgeForm";
+import PhoneForm from "../PhoneForm";
+import AddressForm from "../AddressForm";
 import DeleteForm from "../DeleteForm";
+import AgeForm from "../AgeForm";
+import OwnerForm from "../OwnerForm";
 
 import "./SettingsForm.scss";
+import ContactEmailForm from "../ContactEmailForm/ContactEmailForm";
 
 export default function SettingsForm({
   setShowModal,
@@ -31,13 +34,34 @@ export default function SettingsForm({
       />
     );
   };
-
   const onChangeOwner = () => {
     setTitleModal("Dinos quién es tu humano");
     setChildrenModal(
       <OwnerForm
         setShowModal={setShowModal}
         currentOwner={userInfo.owner}
+        refetch={refetch}
+      />
+    );
+  };
+
+  const onChangeAddress = () => {
+    setTitleModal("Dinos tu dirección");
+    setChildrenModal(
+      <AddressForm
+        setShowModal={setShowModal}
+        currentAddress={userInfo.address}
+        refetch={refetch}
+      />
+    );
+  };
+
+  const onChangePhones = () => {
+    setTitleModal("¿En cuáles teléfonos te pueden contactar?");
+    setChildrenModal(
+      <PhoneForm
+        setShowModal={setShowModal}
+        currentPhones={userInfo.phone}
         refetch={refetch}
       />
     );
@@ -76,6 +100,17 @@ export default function SettingsForm({
     );
   };
 
+  const onChangeContactEmail = () => {
+    setTitleModal("Actualizar tu correo de contacto");
+    setChildrenModal(
+      <ContactEmailForm
+        setShowModal={setShowModal}
+        currentContactEmail={userInfo.contactEmail}
+        refetch={refetch}
+      />
+    );
+  };
+
   const onChangePassword = () => {
     setTitleModal("Cambia tu contraseña");
     setChildrenModal(<PasswordForm logout={onLogout} />);
@@ -102,19 +137,43 @@ export default function SettingsForm({
     logout();
     history.push("/"); //redireccionar al inicio
   };
+
   return (
-    <div className="settings-form">
-      <Button onClick={onChangePassword}>Cambiar contraseña</Button>
-      <Button onClick={onChangeEmail}>Cambiar correo</Button>
-      <Button onClick={onChangeAge}>Cambiar edad</Button>
-      <Button onClick={onChangeBreed}>Cambiar raza</Button>
-      <Button onClick={onChangeOwner}>Cambiar humano</Button>
-      <Button onClick={onChangeDescription}>Cambiar descripción</Button>
-      <Button onClick={onLogout}>Cerrar sesión</Button>
-      <Button onClick={onDeleteUser} className="delete">
-        Borrar usuario
-      </Button>
-      <Button onClick={() => setShowModal(false)}>Cancelar</Button>
-    </div>
+    <>
+      {userInfo.business ? (
+        <div className="settings-form">
+          <Button onClick={onChangePassword}>Cambiar contraseña</Button>
+          <Button onClick={onChangeEmail}>Cambiar correo de usuario</Button>
+          <Button onClick={onChangeAddress}>Cambiar dirección</Button>
+          <Button onClick={onChangePhones}>Cambiar teléfonos</Button>
+          <Button onClick={onChangeContactEmail}>
+            Cambiar correo de contacto
+          </Button>
+          {/* <Button onClick={onChangePhones}>Cambiar horario</Button> */}
+          <Button onClick={onChangeDescription}>Cambiar descripción</Button>
+          <Button onClick={onLogout} className="logout">
+            Cerrar sesión
+          </Button>
+          <Button onClick={onDeleteUser} className="delete">
+            Borrar usuario
+          </Button>
+          <Button onClick={() => setShowModal(false)}>Cancelar</Button>
+        </div>
+      ) : (
+        <div className="settings-form">
+          <Button onClick={onChangePassword}>Cambiar contraseña</Button>
+          <Button onClick={onChangeEmail}>Cambiar correo</Button>
+          <Button onClick={onChangeAge}>Cambiar edad</Button>
+          <Button onClick={onChangeBreed}>Cambiar raza</Button>
+          <Button onClick={onChangeOwner}>Cambiar humano</Button>
+          <Button onClick={onChangeDescription}>Cambiar descripción</Button>
+          <Button onClick={onLogout}>Cerrar sesión</Button>
+          <Button onClick={onDeleteUser} className="delete">
+            Borrar usuario
+          </Button>
+          <Button onClick={() => setShowModal(false)}>Cancelar</Button>
+        </div>
+      )}
+    </>
   );
 }
