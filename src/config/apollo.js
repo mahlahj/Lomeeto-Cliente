@@ -6,7 +6,7 @@ import { getToken } from "../utils/token";
 const httpLink = createUploadLink({
   uri: "https://lomeeto-back.herokuapp.com/",
   // uri: "https://app-lomeeto-server.herokuapp.com/",
-  uri: "http://localhost:4000",
+  // uri: "http://localhost:4000",
 });
 
 const authLink = setContext((_, { headers }) => {

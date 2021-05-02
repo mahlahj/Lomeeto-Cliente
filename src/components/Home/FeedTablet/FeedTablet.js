@@ -68,7 +68,7 @@ export default function FeedTablet() {
                 <Image src={post.idUser.avatar || ImageNotFound} avatar />
                 <span>{post.idUser.name}</span>
                 {/* // Aquí un span que diga si es publicidad */}
-                {!post.ad && (
+                {post.ad && (
                   <p
                     style={{
                       fontSize: 10,
