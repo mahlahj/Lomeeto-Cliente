@@ -10,6 +10,9 @@
     display: none;
   }
 
+  &__noposts {
+    text-align: center;
+  }
   &__box {
     margin-bottom: 50px;
     border: 1px solid $border-grey;

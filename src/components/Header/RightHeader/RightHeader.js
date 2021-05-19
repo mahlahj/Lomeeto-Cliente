@@ -23,11 +23,16 @@ export default function RightHeader() {
     <>
       <div className="right-header">
         <Link to="/">
-          <Icon name="home" />
+          <Icon name="home">
+            <span class="tooltiptext">Inicio</span>
+          </Icon>
         </Link>
-        <Icon name="plus" onClick={() => setShowModal(true)} />
-        <Link to={`/${auth.username}`}>
+        <Icon name="plus" onClick={() => setShowModal(true)}>
+          <span class="tooltiptext">Publicar</span>
+        </Icon>
+        <Link to={`/${auth.username}`} className="link-avatar">
           <Image src={getUser.avatar ? getUser.avatar : ImageNotFound} avatar />
+          <span class="tooltiptext">Cuenta</span>
         </Link>
       </div>
       <ModalUpload show={showModal} setShow={setShowModal} />

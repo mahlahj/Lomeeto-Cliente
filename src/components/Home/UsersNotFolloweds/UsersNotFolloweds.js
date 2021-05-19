@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./UsersNotFolloweds.scss";
 import { Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -10,7 +10,15 @@ import ImageNotFound from "../../../assets/png/avatar.png";
 export default function UsersNotFolloweds({ user }) {
   const { state, town } = user;
 
-  const { data, loading } = useQuery(GET_NOT_FOLLOWEDS);
+  const { data, loading, startPolling, stopPolling } =
+    useQuery(GET_NOT_FOLLOWEDS);
+
+  useEffect(() => {
+    startPolling(3000);
+    return () => {
+      stopPolling();
+    };
+  }, [startPolling, stopPolling]);
 
   if (loading) return null;
   if (data === undefined) return null;
@@ -19,7 +27,7 @@ export default function UsersNotFolloweds({ user }) {
   return (
     <div className="users-not-followeds">
       <h3>
-        Lomeetos en {town}, {state} que no sigues
+        Usuarios en {town}, {state} que no sigues
       </h3>
 
       {map(getNotFolloweds, (user, index) => (

@@ -6,6 +6,9 @@
   height: calc(100vh -48px);
   overflow-y: scroll;
 
+  &__noposts {
+    text-align: center;
+  }
   &::-webkit-scrollbar {
     display: none;
   }

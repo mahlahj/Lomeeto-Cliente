@@ -15,9 +15,8 @@ export default function FeedTablet() {
   const [postSelected, setPostSelected] = useState(null);
 
   //QUERY DE POST DE SEGUIDOS
-  const { data, loading, startPolling, stopPolling } = useQuery(
-    GET_POSTS_FOLLOWEDS
-  );
+  const { data, loading, startPolling, stopPolling } =
+    useQuery(GET_POSTS_FOLLOWEDS);
 
   //QUERY DE RECOMENDADOS
   const {
@@ -28,8 +27,8 @@ export default function FeedTablet() {
   } = useQuery(GET_RECOMMENDED_POSTS);
 
   useEffect(() => {
-    startPolling(10000);
-    startPollingRecommended(10000);
+    startPolling(3000);
+    startPollingRecommended(3000);
     return () => {
       stopPolling();
       stopPollingRecommended();
@@ -61,10 +60,15 @@ export default function FeedTablet() {
   return (
     <>
       <div className="feedTablet">
+        {allPosts.length > 0 && (
+          <h2 className="feedTablet__noposts">
+            No hay publicaciones para ver aún
+          </h2>
+        )}
         {map(allPosts, (post, index) => (
-          <div key={index} className="feed__box">
+          <div key={index} className="feedTablet__box">
             <Link to={`/${post.idUser.username}`}>
-              <div className="feed__box-user">
+              <div className="feedTablet__box-user">
                 <Image src={post.idUser.avatar || ImageNotFound} avatar />
                 <span>{post.idUser.name}</span>
                 {/* // Aquí un span que diga si es publicidad */}
@@ -84,20 +88,20 @@ export default function FeedTablet() {
             </Link>
 
             <div
-              className="feed__box-photo"
+              className="feedTablet__box-photo"
               style={{ backgroundImage: `url("${post.file}")` }}
               onClick={() => openPost(post)}
             />
             {post.text ? (
-              <div className="feed__box-text">
+              <div className="feedTablet__box-text">
                 <span>{post.idUser.username}: </span>
                 {post.text}
               </div>
             ) : null}
-            <div className="feed__box-actions">
+            <div className="feedTablet__box-actions">
               <Actions post={post} />
             </div>
-            <div className="feed__box-form">
+            <div className="feedTablet__box-form">
               <CommentForm post={post} />
             </div>
           </div>

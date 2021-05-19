@@ -167,7 +167,9 @@ export default function SettingsForm({
           <Button onClick={onChangeBreed}>Cambiar raza</Button>
           <Button onClick={onChangeOwner}>Cambiar humano</Button>
           <Button onClick={onChangeDescription}>Cambiar descripción</Button>
-          <Button onClick={onLogout}>Cerrar sesión</Button>
+          <Button onClick={onLogout} className="logout">
+            Cerrar sesión
+          </Button>
           <Button onClick={onDeleteUser} className="delete">
             Borrar usuario
           </Button>

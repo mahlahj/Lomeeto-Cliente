@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { size } from "lodash";
 import { useQuery } from "@apollo/client";
 import { GET_FOLLOWERS, GET_FOLLOWEDS } from "../../../../gql/follow";
@@ -11,14 +11,16 @@ export default function Followers({ username, totalPosts }) {
   const [titleModal, setTitleModal] = useState("");
   const [childrenModal, setChildrenModal] = useState(null);
 
-  const { data: dataFolloweds, loading: loadingFolloweds } = useQuery(
-    GET_FOLLOWEDS,
-    {
-      variables: {
-        username,
-      },
-    }
-  );
+  const {
+    data: dataFolloweds,
+    loading: loadingFolloweds,
+    startPolling: startPollingFolloweds,
+    stopPolling: stopPollingFolloweds,
+  } = useQuery(GET_FOLLOWEDS, {
+    variables: {
+      username,
+    },
+  });
 
   const openFolloweds = () => {
     setTitleModal("Lomeetos seguidos");
@@ -39,19 +41,26 @@ export default function Followers({ username, totalPosts }) {
   const {
     data: dataFollowers,
     loading: loadingFollowers,
-    // startPolling: startPollingFollowers,
-    // stopPolling: stopPollingFollowers,
+    startPolling: startPollingFollowers,
+    stopPolling: stopPollingFollowers,
   } = useQuery(GET_FOLLOWERS, {
     variables: { username },
   });
 
   //PARA REALTIME DE SEGUIDORES
-  //   useEffect(() => {
-  //     startPollingFollowers(1000);
-  //     return () => {
-  //       stopPollingFollowers();
-  //     };
-  //   }, [startPollingFollowers, stopPollingFollowers]);
+  useEffect(() => {
+    startPollingFollowers(3000);
+    startPollingFolloweds(3000);
+    return () => {
+      stopPollingFollowers();
+      stopPollingFolloweds();
+    };
+  }, [
+    startPollingFollowers,
+    stopPollingFollowers,
+    startPollingFolloweds,
+    stopPollingFolloweds,
+  ]);
 
   if (loadingFollowers || loadingFolloweds) return null;
   const { getFollowers } = dataFollowers;

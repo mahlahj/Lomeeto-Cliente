@@ -15,9 +15,8 @@ export default function Feed_Movil() {
   const [postSelected, setPostSelected] = useState(null);
 
   //QUERY DE POST DE SEGUIDOS
-  const { data, loading, startPolling, stopPolling } = useQuery(
-    GET_POSTS_FOLLOWEDS
-  );
+  const { data, loading, startPolling, stopPolling } =
+    useQuery(GET_POSTS_FOLLOWEDS);
 
   //QUERY DE RECOMENDADOS
   const {
@@ -28,8 +27,8 @@ export default function Feed_Movil() {
   } = useQuery(GET_RECOMMENDED_POSTS);
 
   useEffect(() => {
-    startPolling(10000);
-    startPollingRecommended(10000);
+    startPolling(3000);
+    startPollingRecommended(3000);
     return () => {
       stopPolling();
       stopPollingRecommended();
@@ -62,6 +61,11 @@ export default function Feed_Movil() {
   return (
     <>
       <div className="feed-movil">
+        {allPosts.length > 0 && (
+          <h2 className="feed-movil__noposts">
+            No hay publicaciones para ver aún
+          </h2>
+        )}
         {map(allPosts, (post, index) => (
           <div key={index} className="feed-movil__box">
             <Link to={`/${post.idUser.username}`}>
